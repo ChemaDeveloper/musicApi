@@ -1,0 +1,26 @@
+<?php
+return array(
+  'version' => 
+  array(
+    'app' => 
+    array(
+      'default' => 
+      array(
+        0 => '001_roles',
+        1 => '002_users',
+        2 => '003_users_users',
+        3 => '004_privacy',
+        4 => '005_news',
+        5 => '006_lists',
+      ),
+    ),
+    'module' => 
+    array(
+    ),
+    'package' => 
+    array(
+    ),
+  ),
+  'folder' => 'migrations/',
+  'table' => 'migration',
+);
