@@ -25,7 +25,7 @@ class Lists
                             'table' => 'users',
                             'column' => 'id',
                         ),
-                        'on_update' => 'CASCADE',
+                        'on_update' => 'RESTRICT',
                         'on_delete' => 'RESTRICT'
                     )
                 )

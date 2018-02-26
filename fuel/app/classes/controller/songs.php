@@ -142,7 +142,7 @@ class Controller_Songs extends Controller_Base
                 {
                     return $this->jsonResponse( 419, 'No hay canción que mostrar', []);
                 }
-                
+
             	$userList->song[] = $song;
             	$userList->save();
 
@@ -188,6 +188,8 @@ class Controller_Songs extends Controller_Base
 	            {
 	            	return $this->jsonResponse( 400, 'No puede haber parametros duplicados', []);
 	            }
+
+                
 
 	            $validInput = $this->validateNotRequiredParams($input, ['id' => '', 
 	            														'title' => '', 
