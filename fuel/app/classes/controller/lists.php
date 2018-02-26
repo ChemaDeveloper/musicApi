@@ -273,6 +273,44 @@ class Controller_Lists extends Controller_Base
         } 
         
     }
+
+    public function get_watched()
+    {   
+        $input = $_GET;
+        try
+        {
+            $auth = self::authenticate();
+
+            if ($auth == true) 
+            {
+
+                $decodedToken = self::decodeToken();
+                $list = Model_Lists::query()->related('song')
+                                            ->where('id_user', $decodedToken->id)
+                                            ->where('title', 'watched')
+                                            ->get();
+
+
+                if (empty($list))
+                {
+                    return $this->jsonResponse( 419, 'No hay lista que mostrar', []);
+                }
+
+                return $this->jsonResponse( 200, 'lista del usuario', ['list' => Arr::reindex($list)]);
+            }
+            else
+            {
+                return $this->jsonResponse( 401, 'No ha podido ser autenticado', []);
+            }
+
+        }
+        catch (Exception $e) 
+        {
+            return $this->jsonResponse( 500, 'Error interno del servidor', []);
+        } 
+        
+    }
+
     public function post_addSong()
     {
     	$input = $_POST;

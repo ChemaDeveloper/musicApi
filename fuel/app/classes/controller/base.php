@@ -3,6 +3,8 @@ use \Firebase\JWT\JWT;
 
 class Controller_Base extends Controller_Rest
 {
+
+    //KEY para codificar los parametros de mi api
 	private $key = "-----BEGIN PGP PUBLIC KEY BLOCK-----
 
 					mQINBFprU+kBEADigzIUYqR2dwokX5l5DimGVBWvulHJWR1PYryb/qf7WYu+gOey
@@ -56,7 +58,7 @@ class Controller_Base extends Controller_Rest
 					=RN4Z
 					-----END PGP PUBLIC KEY BLOCK-----
 					";
-
+    //Metodo de construcción de un token
 	protected function buildToken($name, $pass, $email, $id_role, $id){
 		$token = ["name" => $name,
 				  "pass" => $pass,
@@ -65,20 +67,24 @@ class Controller_Base extends Controller_Rest
 				  "id" => $id];
 		return $this->encode($token);
 	}
+    //Metodo para codificar datos
     protected function encode($data){
     	return JWT::encode($data, $this->key);
     }
+    //Metodo para descodificar datos
     protected function decode($data){
     	return JWT::decode($data, $this->key, array('HS256'));
     }
+    //Metodo para recoger un token de la cabecera y descodificarlo
     protected function decodeToken(){
         $header = apache_request_headers();
         $token = $header['Authorization'];
         if(!empty($token))
         {
-            return JWT::decode($token, $this->key, array('HS256'));
+            return $this->decode($token);
         }     
     }
+    //Metodo para gestionar la autenticación de los usuarios dentro de la app
     protected function authenticate(){
         try {
                
@@ -110,6 +116,7 @@ class Controller_Base extends Controller_Rest
             return false;
         }
     }
+    //Configuración inicial de la aplicación
     public function post_config(){
         $admin = Model_Users::find('all',
                                     ['where' => ['name' => 'admin']]);
@@ -139,7 +146,7 @@ class Controller_Base extends Controller_Rest
             return self::jsonResponse( 401, 'Configuración ya implementada anteriormente', []);
         }
     }
-
+    //Metodo que devuelve si el usuario esta o no autenticado
     public function get_default_auth()
     {  
         $auth = self::authenticate();
@@ -151,7 +158,8 @@ class Controller_Base extends Controller_Rest
         }
         
     }
-
+    //Metodo para validar parámetros no requeridos
+    //gestiona errores de validación en los parametros, también hace el código mas legible en las llamadas
     protected function validateNotRequiredParams($inputData, $validateData)
     {
         $cont = 0;
@@ -176,7 +184,8 @@ class Controller_Base extends Controller_Rest
         }
         
     }
-
+    //Metodo para validar parámetros requeridos,
+    //gestiona errores de validación en los parametros, también hace el código mas legible en las llamadas
     protected function validateRequiredParams($inputData, $validateData)
     {
         $cont = 0;
@@ -201,7 +210,8 @@ class Controller_Base extends Controller_Rest
         }
         
     }
-
+    //Metodo para añadir el array de files al input, 
+    //gestiona errores a la hora de subir archivos
     protected function addFilesToInput($files, $input)
     {
         if (!empty($files)) 
@@ -214,7 +224,8 @@ class Controller_Base extends Controller_Rest
 
         return $input;
     }
-
+    //Metodo para comprobar si hay datos duplicados en la llamada, 
+    //gestiona errores referentes a los problemas derivados a la repetición de inputs en la llamada
     protected function checkDuplicatedParams($inputData){
         $result = array_unique($inputData);
         if (count($inputData) == count($result)) {
@@ -224,7 +235,7 @@ class Controller_Base extends Controller_Rest
             return false;
         }        
     }
-
+    //Metodo que crea una respuesta json con un codigo, mensaje y data
     protected function jsonResponse($code, $message, $data){
         $json = $this->response(array(
                        'code' => $code,
@@ -233,7 +244,7 @@ class Controller_Base extends Controller_Rest
             ));
         return $json;
     }
-
+    //Metodo que devuelve la id del rol de usuario
     protected function getUserRoleId()
     {
         $userRole = Model_Roles::find('all', 
@@ -244,7 +255,7 @@ class Controller_Base extends Controller_Rest
         }
         return $idRole;
     }
-
+    //Metodo que devuelve la id del sol de administrador
     protected function getAdminRoleId()
     {
         $adminRole = Model_Roles::find('all', 
