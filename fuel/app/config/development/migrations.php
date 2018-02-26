@@ -12,6 +12,9 @@ return array(
         3 => '004_privacy',
         4 => '005_news',
         5 => '006_lists',
+        6 => '007_songs',
+        7 => '008_lists_songs',
+        8 => '009_users_songs',
       ),
     ),
     'module' => 

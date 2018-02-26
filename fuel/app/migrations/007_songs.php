@@ -15,6 +15,8 @@ class Songs
 	    		    'title' => array('constraint' => 11, 'type' => 'varchar', 'null' => false),
 	    		    'artist' => array('constraint' => 11, 'type' => 'varchar', 'null' => false),
 	    		    'url' => array('constraint' => 11, 'type' => 'varchar', 'null' => false),
+	    		    'reproduced' => array('constraint' => 11, 'type' => 'int', 'null' => false),
+	    		    'liked' => array('constraint' => 11, 'type' => 'int', 'null' => false),
 	    		),
 	    		array('id'), false, 'InnoDB', 'utf8_general_ci'
 			);

@@ -25,16 +25,16 @@ class Model_Lists extends Orm\Model
 	        'cascade_delete' => false,
 	    )
 	);
-    // protected static $_many_many = array(
-    //     'song' => array(
-    //         'key_from' => 'id',
-    //         'key_through_from' => 'id_list', // column 1 from the table in between,
-    //         'table_through' => 'lists_songs', // both models plural without prefix in alphabetical order
-    //         'key_through_to' => 'id_song', // column 2 from the table in between,
-    //         'model_to' => 'Model_Songs',
-    //         'key_to' => 'id',
-    //         'cascade_save' => false,
-    //         'cascade_delete' => false,
-    //     )
-    // );
+    protected static $_many_many = array(
+        'song' => array(
+            'key_from' => 'id',
+            'key_through_from' => 'id_list', // column 1 from the table in between,
+            'table_through' => 'lists_songs', // both models plural without prefix in alphabetical order
+            'key_through_to' => 'id_song', // column 2 from the table in between,
+            'model_to' => 'Model_Songs',
+            'key_to' => 'id',
+            'cascade_save' => false,
+            'cascade_delete' => false,
+        )
+    );
 }

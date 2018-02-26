@@ -91,6 +91,17 @@ class Controller_Users extends Controller_Base
             $user->role = Model_Roles::find($idRole);
             $user->save();
 
+            $watchedList = new Model_Lists();
+		    $watchedList->title = "watched";
+		    $watchedList->editable = 0;
+		    $watchedList->user = Model_Users::find($user->id);
+		    $watchedList->save();
+
+		    $lastWatchedList = new Model_Lists();
+		    $lastWatchedList->title = "lastWatched";
+		    $lastWatchedList->editable = 0;
+		    $lastWatchedList->user = Model_Users::find($user->id);
+		    $lastWatchedList->save();
 
             $token = $this->buildToken($name, $this->encode($pass), $email, $idRole, $user->id);
 
