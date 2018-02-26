@@ -12,9 +12,9 @@ class Songs
 	    		'songs',
 	    		array(
 	    		    'id' => array('constraint' => 11, 'type' => 'int', 'auto_increment' => true),
-	    		    'title' => array('constraint' => 11, 'type' => 'varchar', 'null' => false),
-	    		    'artist' => array('constraint' => 11, 'type' => 'varchar', 'null' => false),
-	    		    'url' => array('constraint' => 11, 'type' => 'varchar', 'null' => false),
+	    		    'title' => array('constraint' => 30, 'type' => 'varchar', 'null' => false),
+	    		    'artist' => array('constraint' => 30, 'type' => 'varchar', 'null' => false),
+	    		    'url' => array('constraint' => 200, 'type' => 'varchar', 'null' => false),
 	    		    'reproduced' => array('constraint' => 11, 'type' => 'int', 'null' => false),
 	    		    'liked' => array('constraint' => 11, 'type' => 'int', 'null' => false),
 	    		),
