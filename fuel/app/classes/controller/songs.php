@@ -85,7 +85,7 @@ class Controller_Songs extends Controller_Base
 
             	if (empty($songs))
             	{
-            		return $this->jsonResponse( 419, 'No hay listas que mostrar', []);
+            		return $this->jsonResponse( 419, 'No hay canciones que mostrar', []);
             	}
 
             	return $this->jsonResponse( 200, 'Canciones en la app', ['songs' => Arr::reindex($songs)]);
@@ -138,14 +138,16 @@ class Controller_Songs extends Controller_Base
 		        $id = $input['id'];
             	$song = Model_Songs::find($id);
 
+                if (empty($song))
+                {
+                    return $this->jsonResponse( 419, 'No hay canción que mostrar', []);
+                }
+                
             	$userList->song[] = $song;
             	$userList->save();
 
 
-            	if (empty($song))
-            	{
-            		return $this->jsonResponse( 419, 'No hay listas que mostrar', []);
-            	}
+            	
 
 				$song->reproduced = $song->reproduced + 1;
 				$song->save();

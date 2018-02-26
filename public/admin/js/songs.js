@@ -2,7 +2,7 @@ function createSong(){
 	var title = document.getElementById('titleNewSong');
 	var artist = document.getElementById('artistNewSong');
 	var url = document.getElementById('urlNewSong');
-	if(title.value == "" || artist.value == "" || url.valur == ""){
+	if(title.value == "" || artist.value == "" || url.value == ""){
 		window.alert("Los campos deben estar rellenos");
 	}else{
 		var token = sessionStorage.getItem("token");
