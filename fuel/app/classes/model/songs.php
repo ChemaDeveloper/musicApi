@@ -30,7 +30,7 @@ class Model_Songs extends Orm\Model
             'key_through_to' => 'id_song', // column 2 from the table in between,
             'model_to' => 'Model_Lists',
             'key_to' => 'id',
-            'cascade_save' => false,
+            'cascade_save' => true,
             'cascade_delete' => false,
         ),
         'user' => array(
